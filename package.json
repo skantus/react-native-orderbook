@@ -13,7 +13,8 @@
     "type-check": "tsc",
     "app-check": "yarn test && yarn lint && yarn format-check && yarn type-check",
     "coverage": "jest --coverage && open ./coverage/lcov-report/index.html",
-    "ts-coverage": "typescript-coverage-report && open ./coverage-ts/index.html"
+    "ts-coverage": "typescript-coverage-report && open ./coverage-ts/index.html",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "17.0.2",
@@ -31,6 +32,7 @@
     "eslint": "7.32.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
+    "husky": "7.0.4",
     "jest": "26.6.3",
     "metro-react-native-babel-preset": "0.66.2",
     "prettier": "2.5.1",

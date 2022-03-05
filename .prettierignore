@@ -1,0 +1,4 @@
+coverage
+*/lcov-report/*
+coverage-ts
+*.yml

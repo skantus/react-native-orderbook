@@ -9,7 +9,7 @@ module.exports = {
     React: true,
     NodeJS: true,
   },
-  ignorePatterns: [],
+  ignorePatterns: ['**/coverage-ts/*', '**/coverage/*', '**/lcov-report/*'],
   rules: {
     'react/jsx-curly-brace-presence': [2, { props: 'never' }],
     'no-shadow': 'off',
