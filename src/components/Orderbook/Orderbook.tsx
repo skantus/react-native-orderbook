@@ -1,3 +1,4 @@
+import { useTheme } from '../../theme';
 import React from 'react';
 import {
   SafeAreaView,
@@ -5,11 +6,9 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
 import {
-  Colors,
   DebugInstructions,
   Header,
   LearnMoreLinks,
@@ -19,14 +18,15 @@ import {
 const Section: React.FC<{
   title: string;
 }> = ({ children, title }) => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const { theme } = useTheme();
+
   return (
     <View style={styles.sectionContainer}>
       <Text
         style={[
           styles.sectionTitle,
           {
-            color: isDarkMode ? Colors.white : Colors.black,
+            color: theme.$primaryTextColor,
           },
         ]}>
         {title}
@@ -35,7 +35,7 @@ const Section: React.FC<{
         style={[
           styles.sectionDescription,
           {
-            color: isDarkMode ? Colors.light : Colors.dark,
+            color: theme.$defaultTextColor,
           },
         ]}>
         {children}
@@ -44,23 +44,23 @@ const Section: React.FC<{
   );
 };
 
-const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+const Orderbook = () => {
+  const { theme, statusBarStyle } = useTheme();
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: theme.$backgroundColor,
   };
 
   return (
     <SafeAreaView style={backgroundStyle} testID="app-id">
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={statusBarStyle} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            backgroundColor: theme.$backgroundColor,
           }}>
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Orderbook;

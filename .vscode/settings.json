@@ -3,6 +3,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.words": [],
+  "cSpell.words": [
+    "Orderbook",
+    "bitcoin", 
+    "etherium", 
+    "PI_XBTUSD", 
+    "PI_ETHUSD",
+  ],
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 }
