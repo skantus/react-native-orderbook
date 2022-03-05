@@ -25,7 +25,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': [
       'error',
       {
-        additionalHooks: '',
+        additionalHooks: '(useStyle)',
       },
     ],
     'react/jsx-sort-props': 2,

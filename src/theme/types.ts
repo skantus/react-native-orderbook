@@ -1,6 +1,7 @@
 export type Theme = {
-  $backgroundColor: string;
-  $defaultTextColor: string;
-  $primaryTextColor: string;
-  $secondaryTextColor: string;
+  $background: string;
+  $defaultText: string;
+  $primary: string;
+  $secondary: string;
+  $ternary: string;
 };

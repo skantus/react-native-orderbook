@@ -1,104 +1,62 @@
-import { useTheme } from '../../theme';
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import styles from './styles';
+import React, { useCallback } from 'react';
+import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import FEEDS from 'src/api/mocks/feeds';
+import Header from 'src/components/common/Header';
+import { useStyle } from 'src/hooks';
+import { useTheme } from 'src/theme';
+import { keyExtractor } from 'src/utils';
 
-const Section: React.FC<{
-  title: string;
-}> = ({ children, title }) => {
-  const { theme } = useTheme();
-
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: theme.$primaryTextColor,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: theme.$defaultTextColor,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+const ITEMS_PER_PAGE = 20;
 
 const Orderbook = () => {
-  const { theme, statusBarStyle } = useTheme();
+  const { theme } = useTheme();
 
-  const backgroundStyle = {
-    backgroundColor: theme.$backgroundColor,
-  };
+  const containerStyle = useStyle(
+    () => [styles.container, { backgroundColor: theme.$background }],
+    [theme.$background],
+  );
+
+  const textStyle = useStyle(
+    () => [{ color: theme.$defaultText }],
+    [theme.$defaultText],
+  );
+
+  const renderListHeader = useCallback(() => <View />, []);
+
+  const renderListFooter = useCallback(() => <View />, []);
+
+  const renderItem = useCallback(
+    ({ item }: { item: number[] }) => (
+      <View style={styles.content}>
+        <Text style={textStyle}>{item[0]}</Text>
+        <Text style={textStyle}>{item[1]}</Text>
+        <Text style={textStyle}>{item[0]}</Text>
+      </View>
+    ),
+    [textStyle],
+  );
 
   return (
-    <SafeAreaView style={backgroundStyle} testID="app-id">
-      <StatusBar barStyle={statusBarStyle} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: theme.$backgroundColor,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={containerStyle}>
+      <Header />
+      <FlatList
+        ListFooterComponent={renderListFooter}
+        ListHeaderComponent={renderListHeader}
+        alwaysBounceHorizontal={false}
+        contentContainerStyle={styles.contentContainerStyle}
+        contentInsetAdjustmentBehavior="always"
+        data={FEEDS.bids}
+        initialNumToRender={ITEMS_PER_PAGE}
+        keyExtractor={keyExtractor}
+        persistentScrollbar={true}
+        renderItem={renderItem}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        style={containerStyle}
+      />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  highlight: {
-    fontWeight: '700',
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionDescription: {
-    fontSize: 18,
-    fontWeight: '400',
-    marginTop: 8,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-});
 
 export default Orderbook;

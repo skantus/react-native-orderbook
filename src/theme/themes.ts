@@ -1,17 +1,19 @@
 import { Theme } from './types';
 
 const dark: Theme = {
-  $backgroundColor: 'black',
-  $defaultTextColor: 'white',
-  $primaryTextColor: 'green',
-  $secondaryTextColor: 'red',
+  $background: '#131723',
+  $defaultText: '#b5b8be',
+  $primary: '#067759',
+  $secondary: '#a93532',
+  $ternary: '#454d59',
 };
 
 const light: Theme = {
-  $backgroundColor: 'white',
-  $defaultTextColor: 'black',
-  $primaryTextColor: 'tomato',
-  $secondaryTextColor: 'cyan',
+  $background: 'white',
+  $defaultText: 'black',
+  $primary: 'black',
+  $secondary: 'black',
+  $ternary: 'gray',
 };
 
 export { dark, light };
