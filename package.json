@@ -11,7 +11,9 @@
     "format-check": "prettier --check '**/*.{js,ts,tsx}'",
     "format-write": "prettier --write '**/*.{js,ts,tsx}'",
     "type-check": "tsc",
-    "app-check": "yarn test && yarn lint && yarn format-check && yarn type-check"
+    "app-check": "yarn test && yarn lint && yarn format-check && yarn type-check",
+    "coverage": "jest --coverage && open ./coverage/lcov-report/index.html",
+    "ts-coverage": "typescript-coverage-report && open ./coverage-ts/index.html"
   },
   "dependencies": {
     "react": "17.0.2",
@@ -33,7 +35,8 @@
     "metro-react-native-babel-preset": "0.66.2",
     "prettier": "2.5.1",
     "react-test-renderer": "17.0.2",
-    "typescript": "4.4.4"
+    "typescript": "4.4.4",
+    "typescript-coverage-report": "0.6.4"
   },
   "resolutions": {
     "@types/react": "17"
@@ -47,6 +50,32 @@
       "jsx",
       "json",
       "node"
+    ]
+  },
+  "coverageThreshold": {
+    "global": {
+      "branches": 35,
+      "functions": 40,
+      "lines": 50,
+      "statements": 50
+    }
+  },
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "!**/*.d{ts}",
+    "!**/node_modules/**",
+    "!**/lcov-report/**"
+  ],
+  "typeCoverage": {
+    "ignoreFiles": [
+      "android/**",
+      "ios/**",
+      "coverage/**",
+      "coverage-ts/**",
+      "src/lcov-report/**",
+      "**/__mocks__/**",
+      "**/*.js",
+      "**/*.json"
     ]
   }
 }

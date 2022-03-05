@@ -58,3 +58,16 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+*.env
+
+coverage
+coverage-ts
+
+src/lcov-report/*
+src/lcov.info
+src/clover.xml
+src/coverage-final.json
+android/java_pid75103.hprof
+
+*.vscode
