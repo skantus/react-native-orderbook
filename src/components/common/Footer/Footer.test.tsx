@@ -4,7 +4,9 @@ import React from 'react';
 
 describe('Footer', () => {
   it('should render correctly', () => {
-    const { queryByTestId } = render(<Footer />);
+    const { queryByTestId } = render(
+      <Footer buttonTitle="test" onPressButton={jest.fn()} />,
+    );
 
     const component = queryByTestId('footer');
 

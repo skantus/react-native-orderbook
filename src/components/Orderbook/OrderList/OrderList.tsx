@@ -2,16 +2,18 @@ import OrderItem from '../OrderItem';
 import styles from './styles';
 import React, { ReactElement, ReactNode, useCallback } from 'react';
 import { FlatList, View } from 'react-native';
+import { FeedsType } from 'src/api';
 import { OrderItemType, OrderType } from 'src/components/types';
-import { keyExtractor } from 'src/utils';
 
 type Props = {
-  list: number[][];
   type: OrderType;
   header: ReactNode;
+  list?: FeedsType;
 };
 
-const OrderList = ({ list, type, header }: Props): ReactElement => {
+const keyExtractor = (_: unknown, index: number) => `item-${index}`;
+
+const OrderList = ({ type, header, list }: Props): ReactElement => {
   const renderItem = useCallback(
     ({ item, index }: OrderItemType) => (
       <OrderItem index={index} item={item} type={type} />

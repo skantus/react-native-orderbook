@@ -2,16 +2,16 @@ import styles from './styles';
 import React, { ReactElement } from 'react';
 import { View } from 'react-native';
 import Button from 'src/components/common/Button';
-import { useTheme } from 'src/theme';
 
-const Footer = (): ReactElement => {
-  const { toggleTheme } = useTheme();
-
-  return (
-    <View style={styles.container} testID="footer">
-      <Button onPress={toggleTheme} title="Toggle Feed" />
-    </View>
-  );
+type Props = {
+  buttonTitle: string;
+  onPressButton: () => void;
 };
+
+const Footer = ({ buttonTitle, onPressButton }: Props): ReactElement => (
+  <View style={styles.container} testID="footer">
+    <Button onPress={onPressButton} title={buttonTitle} />
+  </View>
+);
 
 export default Footer;
