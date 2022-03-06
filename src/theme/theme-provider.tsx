@@ -6,7 +6,6 @@ import React, {
   useContext,
   useState,
 } from 'react';
-import { useColorScheme } from 'react-native';
 import { StatusBar } from 'react-native';
 
 const ThemeContext = createContext({
@@ -18,9 +17,7 @@ const ThemeContext = createContext({
 const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const colorScheme = useColorScheme();
-  const isDarkMode = colorScheme === 'dark';
-  const [isDark, setIsDark] = useState(isDarkMode);
+  const [isDark, setIsDark] = useState(true);
 
   const toggleTheme = useCallback(() => setIsDark(!isDark), [isDark]);
 

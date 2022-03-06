@@ -6,6 +6,7 @@ const dark: Theme = {
   $primary: '#067759',
   $secondary: '#a93532',
   $ternary: '#454d59',
+  $brand: '#574dda',
 };
 
 const light: Theme = {
@@ -14,6 +15,7 @@ const light: Theme = {
   $primary: 'black',
   $secondary: 'black',
   $ternary: 'gray',
+  $brand: '#b5b8be',
 };
 
 export { dark, light };

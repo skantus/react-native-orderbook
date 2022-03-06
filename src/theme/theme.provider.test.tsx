@@ -15,7 +15,7 @@ describe('Theme Provider', () => {
     it('text has correct theme color', async () => {
       const mockedStyle = {
         text: {
-          color: 'black',
+          color: light.$defaultText,
         },
       };
 
@@ -38,7 +38,7 @@ describe('Theme Provider', () => {
     it('text has correct theme color', async () => {
       const mockedStyle = {
         text: {
-          color: '#b5b8be',
+          color: dark.$defaultText,
         },
       };
 

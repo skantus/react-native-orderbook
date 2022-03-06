@@ -4,19 +4,12 @@ import { Theme } from 'src/theme';
 const styles = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      alignItems: 'center',
-      borderBottomColor: theme.$ternary,
-      borderBottomWidth: 1,
-      flexDirection: 'row',
-      height: 40,
-      justifyContent: 'space-between',
-      paddingHorizontal: 20,
+      backgroundColor: theme.$brand,
+      borderRadius: 5,
+      paddingHorizontal: 30,
+      paddingVertical: 10,
     },
     text: {
-      color: theme.$defaultText,
-      fontSize: 12,
-    },
-    title: {
       color: theme.$defaultText,
       fontSize: 16,
       fontWeight: '700',

@@ -2,8 +2,8 @@ import styles from './styles';
 import React, { useCallback } from 'react';
 import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import FEEDS from 'src/api/mocks/feeds';
+import Footer from 'src/components/common/Footer';
 import Header from 'src/components/common/Header';
-import { useStyle } from 'src/hooks';
 import { useTheme } from 'src/theme';
 import { keyExtractor } from 'src/utils';
 
@@ -11,16 +11,7 @@ const ITEMS_PER_PAGE = 20;
 
 const Orderbook = () => {
   const { theme } = useTheme();
-
-  const containerStyle = useStyle(
-    () => [styles.container, { backgroundColor: theme.$background }],
-    [theme.$background],
-  );
-
-  const textStyle = useStyle(
-    () => [{ color: theme.$defaultText }],
-    [theme.$defaultText],
-  );
+  const style = styles(theme);
 
   const renderListHeader = useCallback(() => <View />, []);
 
@@ -28,23 +19,23 @@ const Orderbook = () => {
 
   const renderItem = useCallback(
     ({ item }: { item: number[] }) => (
-      <View style={styles.content}>
-        <Text style={textStyle}>{item[0]}</Text>
-        <Text style={textStyle}>{item[1]}</Text>
-        <Text style={textStyle}>{item[0]}</Text>
+      <View style={style.content}>
+        <Text style={style.text}>{item[0]}</Text>
+        <Text style={style.text}>{item[1]}</Text>
+        <Text style={style.text}>{item[0]}</Text>
       </View>
     ),
-    [textStyle],
+    [style.content, style.text],
   );
 
   return (
-    <SafeAreaView style={containerStyle}>
+    <SafeAreaView style={style.container}>
       <Header />
       <FlatList
         ListFooterComponent={renderListFooter}
         ListHeaderComponent={renderListHeader}
         alwaysBounceHorizontal={false}
-        contentContainerStyle={styles.contentContainerStyle}
+        contentContainerStyle={style.contentContainerStyle}
         contentInsetAdjustmentBehavior="always"
         data={FEEDS.bids}
         initialNumToRender={ITEMS_PER_PAGE}
@@ -53,8 +44,9 @@ const Orderbook = () => {
         renderItem={renderItem}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        style={containerStyle}
+        style={style.container}
       />
+      <Footer />
     </SafeAreaView>
   );
 };
