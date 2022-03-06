@@ -19,7 +19,7 @@ const OrderItem = ({ item, index, type }: Props): ReactElement => {
     <View key={index} style={style.content} testID="orderItem">
       <Text style={textStyle}>{item[0]}</Text>
       <Text style={style.text}>{item[1]}</Text>
-      <Text style={style.text}>0</Text>
+      <Text style={style.text}>{item[1]}</Text>
     </View>
   );
 };

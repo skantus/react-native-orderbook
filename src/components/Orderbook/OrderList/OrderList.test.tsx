@@ -14,5 +14,10 @@ describe('OrderList', () => {
 
     expect(component?.props.children).toBeTruthy();
     expect(component?.props.testID).toEqual('orderList');
+
+    const flatList = queryByTestId('flatList');
+
+    expect(flatList?.props.children).toBeTruthy();
+    expect(flatList?.props.testID).toEqual('flatList');
   });
 });

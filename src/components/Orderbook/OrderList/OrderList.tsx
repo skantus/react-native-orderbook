@@ -35,6 +35,7 @@ const OrderList = ({ type, header, list }: Props): ReactElement => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         style={styles.container}
+        testID="flatList"
       />
     </View>
   );

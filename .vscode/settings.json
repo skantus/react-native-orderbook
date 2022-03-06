@@ -9,7 +9,8 @@
     "etherium", 
     "PI_XBTUSD", 
     "PI_ETHUSD",
-    "cryptofacilities"
+    "cryptofacilities",
+    "lcov"
   ],
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 }
