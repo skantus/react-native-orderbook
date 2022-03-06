@@ -1,5 +1,5 @@
 import styles from './styles';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { useTheme } from 'src/theme';
 
@@ -8,7 +8,7 @@ type Props = {
   onPress: () => void;
 };
 
-const Button = ({ title, onPress }: Props) => {
+const Button = ({ title, onPress }: Props): ReactElement => {
   const { theme } = useTheme();
   const style = styles(theme);
 

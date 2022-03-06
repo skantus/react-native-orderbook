@@ -3,22 +3,17 @@ import { Theme } from 'src/theme';
 
 const styles = (theme: Theme) =>
   StyleSheet.create({
-    container: {
-      alignItems: 'center',
-      borderBottomColor: theme.$ternary,
-      borderBottomWidth: 1,
+    headerContent: {
+      backgroundColor: theme.$background,
+      borderBottomColor: theme.$base,
+      borderBottomWidth: 0.5,
       flexDirection: 'row',
-      height: 40,
       justifyContent: 'space-between',
       paddingHorizontal: 24,
+      paddingVertical: 5,
     },
-    text: {
-      color: theme.$gray,
-      fontSize: 12,
-    },
-    title: {
-      color: theme.$gray,
-      fontSize: 16,
+    headerText: {
+      color: theme.$ternary,
       fontWeight: '700',
     },
   });

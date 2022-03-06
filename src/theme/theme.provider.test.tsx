@@ -15,7 +15,7 @@ describe('Theme Provider', () => {
     it('text has correct theme color', async () => {
       const mockedStyle = {
         text: {
-          color: light.$defaultText,
+          color: light.$text,
         },
       };
 
@@ -26,7 +26,7 @@ describe('Theme Provider', () => {
       );
 
       const text = getByText('Test Light theme');
-      expect(text.props.style.color).toEqual(light.$defaultText);
+      expect(text.props.style.color).toEqual(light.$text);
     });
   });
 
@@ -38,7 +38,7 @@ describe('Theme Provider', () => {
     it('text has correct theme color', async () => {
       const mockedStyle = {
         text: {
-          color: dark.$defaultText,
+          color: dark.$text,
         },
       };
 
@@ -49,7 +49,7 @@ describe('Theme Provider', () => {
       );
 
       const text = getByText('Test Dark theme');
-      expect(text.props.style.color).toEqual(dark.$defaultText);
+      expect(text.props.style.color).toEqual(dark.$text);
     });
   });
 });

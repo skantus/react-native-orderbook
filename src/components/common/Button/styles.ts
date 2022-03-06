@@ -10,7 +10,7 @@ const styles = (theme: Theme) =>
       paddingVertical: 10,
     },
     text: {
-      color: theme.$defaultText,
+      color: theme.$text,
       fontSize: 16,
       fontWeight: '700',
     },

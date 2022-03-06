@@ -1,9 +1,9 @@
 import styles from './styles';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'src/theme';
 
-const Header = () => {
+const Header = (): ReactElement => {
   const { theme, toggleTheme, isDark } = useTheme();
   const style = styles(theme);
 

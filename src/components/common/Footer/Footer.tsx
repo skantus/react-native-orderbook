@@ -1,10 +1,10 @@
 import styles from './styles';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { View } from 'react-native';
 import Button from 'src/components/common/Button';
 import { useTheme } from 'src/theme';
 
-const Footer = () => {
+const Footer = (): ReactElement => {
   const { toggleTheme } = useTheme();
 
   return (
