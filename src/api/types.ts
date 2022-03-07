@@ -16,7 +16,7 @@ export type WebsocketResponse = {
   asks?: OrderType[];
 };
 
-export type FeedType = { price: number; size: number; total: number };
+export type FeedType = { price: string; size: string; total: string };
 
 export type FeedsResponse = {
   product_id?: string;

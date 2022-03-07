@@ -5,7 +5,7 @@ const dark: Theme = {
   $text: 'white',
   $gray: '#b5b8be',
   $base: '#1e2735',
-  $primary: 'seagreen',
+  $primary: 'green',
   $secondary: 'red',
   $ternary: '#454d59',
   $brand: '#574dda',

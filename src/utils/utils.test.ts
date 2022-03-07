@@ -1,4 +1,4 @@
-import { getUniqueList } from './utils';
+import { getUniqueList } from './getUniqueList';
 import { OrderType } from 'src/api';
 
 describe('GetUniqueList', () => {
@@ -33,7 +33,7 @@ describe('GetUniqueList', () => {
   ];
 
   it('Get a unique list of elements', () => {
-    const result = getUniqueList({ previousList, currentList });
+    const result = getUniqueList(previousList, currentList);
     expect(result).toEqual(expectedResult);
   });
 
@@ -87,10 +87,7 @@ describe('GetUniqueList', () => {
   ];
 
   it('Get a unique list of bids', () => {
-    const result = getUniqueList({
-      previousList: previousBids,
-      currentList: currentBids,
-    });
+    const result = getUniqueList(previousBids, currentBids);
     expect(result).toEqual(results);
   });
 });
