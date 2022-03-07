@@ -1,33 +1,33 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from 'src/theme';
 
+const defaultText: { [key: string]: string | number } = {
+  flex: 1,
+  fontWeight: '600',
+  textAlign: 'right',
+};
+
 const styles = (theme: Theme) =>
   StyleSheet.create({
     askText: {
       color: theme.$secondary,
-      fontWeight: '400',
+      ...defaultText,
     },
     bidText: {
       color: theme.$primary,
-      fontWeight: '400',
+      ...defaultText,
     },
     content: {
+      flex: 1,
       flexDirection: 'row',
       height: 20,
       justifyContent: 'space-between',
       marginTop: 10,
-      paddingHorizontal: 24,
-    },
-    spreadText: {
-      color: theme.$ternary,
-      fontSize: 15,
-      fontWeight: '700',
-      paddingVertical: 5,
-      textAlign: 'center',
+      paddingRight: 24,
     },
     text: {
       color: theme.$gray,
-      fontWeight: '500',
+      ...defaultText,
     },
   });
 

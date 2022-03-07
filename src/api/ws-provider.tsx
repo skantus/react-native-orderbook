@@ -1,4 +1,4 @@
-import { WebsocketMessage, WebsocketResponse } from './types';
+import { FeedsResponse, WebsocketMessage, WebsocketResponse } from './types';
 import { isEmpty, throttle } from 'lodash';
 import React, {
   createContext,
@@ -19,7 +19,7 @@ import {
 import { getList } from 'src/utils';
 
 type WSProviderType = {
-  data: WebsocketResponse;
+  data: FeedsResponse;
   toggleFeed: (message: { message: WebsocketMessage }) => void;
 };
 
@@ -33,7 +33,7 @@ const useWS = () => useContext(WSContext);
 const getSocket = (url: string) => new WebSocket(url);
 
 const WSProvider = ({ children }: { children: ReactNode }) => {
-  const [data, setData] = useState<WebsocketResponse>({});
+  const [data, setData] = useState<FeedsResponse>({});
   const connection = useRef<WebSocket>(getSocket(WEBSOCKET_URL));
   const initialDataFeed = useRef<WebsocketResponse>({});
 
@@ -55,7 +55,7 @@ const WSProvider = ({ children }: { children: ReactNode }) => {
         const data: WebsocketMessage = JSON.parse(response?.data);
         if (data?.feed === INITIAL_FEED_KEY) {
           initialDataFeed.current = data;
-          setData(data);
+          setData(getList(initialDataFeed.current, data));
           updateData();
         }
       }),

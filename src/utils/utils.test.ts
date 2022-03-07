@@ -1,8 +1,8 @@
 import { getUniqueList } from './utils';
-import { FeedsType } from 'src/api';
+import { OrderType } from 'src/api';
 
 describe('GetUniqueList', () => {
-  const previousList: FeedsType = [
+  const previousList: OrderType[] = [
     [1, 1],
     [2, 2],
     [3, 3],
@@ -12,7 +12,7 @@ describe('GetUniqueList', () => {
     [1, 1],
   ];
 
-  const currentList: FeedsType = [
+  const currentList: OrderType[] = [
     [1, 1],
     [2, 2],
     [3, 3],
@@ -23,7 +23,7 @@ describe('GetUniqueList', () => {
     [1, 1],
   ];
 
-  const expectedResult: FeedsType = [
+  const expectedResult: OrderType[] = [
     [1, 1],
     [2, 2],
     [3, 3],
@@ -37,7 +37,7 @@ describe('GetUniqueList', () => {
     expect(result).toEqual(expectedResult);
   });
 
-  const previousBids: FeedsType = [
+  const previousBids: OrderType[] = [
     [10000.1, 20000.2],
     [38989.5, 4649.0],
     [38989.0, 4592.0],
@@ -53,7 +53,7 @@ describe('GetUniqueList', () => {
     [1, 1],
   ];
 
-  const currentBids: FeedsType = [
+  const currentBids: OrderType[] = [
     [10000.1, 20000.2],
     [10000.1, 20000.2],
     [1, 1],
@@ -70,7 +70,7 @@ describe('GetUniqueList', () => {
     [2, 2],
   ];
 
-  const results: FeedsType = [
+  const results: OrderType[] = [
     [10000.1, 20000.2],
     [38989.5, 4649],
     [38989, 4592],

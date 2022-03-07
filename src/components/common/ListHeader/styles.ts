@@ -8,13 +8,14 @@ const styles = (theme: Theme) =>
       borderBottomColor: theme.$base,
       borderBottomWidth: 0.5,
       flexDirection: 'row',
-      justifyContent: 'space-between',
-      paddingHorizontal: 24,
+      paddingRight: 24,
       paddingVertical: 5,
     },
     headerText: {
       color: theme.$ternary,
+      flex: 1,
       fontWeight: '700',
+      textAlign: 'right',
     },
   });
 

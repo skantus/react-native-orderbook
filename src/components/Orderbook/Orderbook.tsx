@@ -21,14 +21,6 @@ const Orderbook = () => {
   const style = styles(theme);
   const { data, toggleFeed } = useWS();
 
-  const getImage = useMemo(
-    () =>
-      data?.product_id === BITCOIN_ID
-        ? require('src/images/bitcoin.png')
-        : require('src/images/etherium.png'),
-    [data?.product_id],
-  );
-
   const getMessage = useMemo(
     () =>
       data?.product_id === BITCOIN_ID
@@ -48,7 +40,7 @@ const Orderbook = () => {
 
   return (
     <SafeAreaView style={style.container} testID="orderbook">
-      <Header image={getImage} title="Order Book" />
+      <Header title="Order Book" />
       <OrderList
         header={<ListHeader titles={listHeaderTitles} />}
         list={data?.asks}

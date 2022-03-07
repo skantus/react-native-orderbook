@@ -1,5 +1,7 @@
+import { FeedType } from 'src/api';
+
 export type OrderItemType = {
-  item: number[];
+  item: FeedType;
   index: number;
 };
 

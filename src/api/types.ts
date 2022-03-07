@@ -4,7 +4,7 @@ export type WebsocketMessage = {
   product_ids?: Array<'PI_XBTUSD' | 'PI_ETHUSD'>;
 };
 
-export type FeedsType = [number, number][] | undefined;
+export type OrderType = [number, number];
 
 export type WebsocketResponse = {
   event?: string;
@@ -12,6 +12,14 @@ export type WebsocketResponse = {
   feed?: string;
   version?: number;
   numLevels?: number;
-  bids?: FeedsType;
-  asks?: FeedsType;
+  bids?: OrderType[];
+  asks?: OrderType[];
+};
+
+export type FeedType = { price: number; size: number; total: number };
+
+export type FeedsResponse = {
+  product_id?: string;
+  bids?: FeedType[];
+  asks?: FeedType[];
 };

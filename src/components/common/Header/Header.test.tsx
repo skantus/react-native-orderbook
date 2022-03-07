@@ -4,9 +4,7 @@ import React from 'react';
 
 describe('Header', () => {
   it('should render correctly', () => {
-    const { queryByTestId, getByText } = render(
-      <Header image={require('src/images/bitcoin.png')} title="test" />,
-    );
+    const { queryByTestId, getByText } = render(<Header title="test" />);
 
     const component = queryByTestId('header');
 

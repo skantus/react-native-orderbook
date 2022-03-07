@@ -6,7 +6,11 @@ import { OrderType } from 'src/components/types';
 describe('OrderItem', () => {
   it('should render correctly', () => {
     const { queryByTestId } = render(
-      <OrderItem index={0} item={[1, 2, 3]} type={OrderType.Ask} />,
+      <OrderItem
+        index={0}
+        item={{ price: 0, size: 0, total: 0 }}
+        type={OrderType.Ask}
+      />,
     );
 
     const component = queryByTestId('orderItem');
