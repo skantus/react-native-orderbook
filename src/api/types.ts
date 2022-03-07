@@ -20,6 +20,7 @@ export type FeedType = { price: string; size: string; total: string };
 
 export type FeedsResponse = {
   product_id?: string;
+  spread?: string;
   bids?: FeedType[];
   asks?: FeedType[];
 };

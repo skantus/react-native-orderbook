@@ -1,6 +1,6 @@
 import OrderList from './OrderList';
 import styles from './styles';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { useWS } from 'src/api';
 import Footer from 'src/components/common/Footer';
@@ -21,22 +21,19 @@ const Orderbook = () => {
   const style = styles(theme);
   const { data, toggleFeed } = useWS();
 
-  const getMessage = useMemo(
-    () =>
-      data?.product_id === BITCOIN_ID
-        ? ETHERIUM_API_MESSAGE
-        : BITCOIN_API_MESSAGE,
-    [data?.product_id],
-  );
-
   const renderHeader = useCallback(
-    () => <Text style={style.spreadText}>Spread 13.0 (0.04%)</Text>,
-    [style.spreadText],
+    () => <Text style={style.spreadText}>{data?.spread}</Text>,
+    [style.spreadText, data?.spread],
   );
 
   const onToggleFeed = useCallback(() => {
-    toggleFeed({ message: getMessage });
-  }, [toggleFeed, getMessage]);
+    const message =
+      data?.product_id === BITCOIN_ID
+        ? ETHERIUM_API_MESSAGE
+        : BITCOIN_API_MESSAGE;
+
+    toggleFeed({ message });
+  }, [data?.product_id, toggleFeed]);
 
   return (
     <SafeAreaView style={style.container} testID="orderbook">

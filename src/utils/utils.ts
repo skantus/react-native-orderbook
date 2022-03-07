@@ -1,16 +1,8 @@
+import { calculatePercent } from './calculatePercent';
+import { formattedResponse } from './formattedResponse';
 import { getUniqueList } from './getUniqueList';
 import { numberFormat } from './numberFormat';
-import { FeedsResponse, FeedType, OrderType, WebsocketResponse } from 'src/api';
-
-const formattedResponse = (list: OrderType[]): FeedType[] => {
-  let totalAccumulated = 0;
-  let digits = 2;
-  return list?.map(order => ({
-    price: numberFormat(digits).format(order[0]),
-    size: numberFormat().format(order[1]),
-    total: numberFormat().format((totalAccumulated += order[1])),
-  }));
-};
+import { FeedsResponse, WebsocketResponse } from 'src/api';
 
 const getList = (
   initialData: WebsocketResponse,
@@ -18,7 +10,17 @@ const getList = (
 ): FeedsResponse => {
   const bids = getUniqueList(initialData?.bids, data?.bids);
   const asks = getUniqueList(initialData?.asks, data?.asks);
-  return { bids: formattedResponse(bids), asks: formattedResponse(asks) };
+
+  const asksLowest = asks[0][0];
+  const bidsHighest = bids[0][0];
+  const spread = numberFormat(1).format(asksLowest - bidsHighest);
+  const spreadPercent = calculatePercent(asksLowest, bidsHighest);
+
+  return {
+    bids: formattedResponse(bids),
+    asks: formattedResponse(asks),
+    spread: `Spread: ${spread} (${spreadPercent}%)`,
+  };
 };
 
 export { getList };
