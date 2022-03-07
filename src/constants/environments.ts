@@ -12,14 +12,14 @@ const CUSTOM_MESSAGE: WebsocketMessage = {
   product_ids: [],
 };
 
-export const BITCOIN_API_MESSAGE: WebsocketMessage = {
+export const BITCOIN_API: WebsocketMessage = {
   ...CUSTOM_MESSAGE,
   product_ids: [BITCOIN_ID],
 };
 
-export const ETHERIUM_API_MESSAGE: WebsocketMessage = {
+export const ETHERIUM_API: WebsocketMessage = {
   ...CUSTOM_MESSAGE,
   product_ids: [ETHERIUM_ID],
 };
 
-export const THROTTLE_DELAY = 500;
+export const THROTTLE_DELAY = 400;

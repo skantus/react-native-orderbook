@@ -1,10 +1,11 @@
-import { getList } from './utils';
+import { getUpdatedList } from './utils';
 import { FeedsResponse, WebsocketResponse } from 'src/api';
 
 describe('formattedResponse', () => {
   const initialData: WebsocketResponse = {
-    numLevels: 25,
     feed: 'book_ui_1_snapshot',
+    numLevels: 25,
+    product_id: 'PI_XBTUSD',
     bids: [
       [37788, 4400],
       [37785, 30425],
@@ -59,7 +60,6 @@ describe('formattedResponse', () => {
       [37854, 100],
       [37854.5, 50000],
     ],
-    product_id: 'PI_XBTUSD',
   };
 
   const data: WebsocketResponse = {
@@ -124,63 +124,264 @@ describe('formattedResponse', () => {
 
   const expectedResult: FeedsResponse = {
     bids: [
-      { price: '37,788.00', size: '4,400', total: '4,400' },
-      { price: '37,785.00', size: '30,425', total: '34,825' },
-      { price: '37,784.00', size: '10,000', total: '44,825' },
-      { price: '37,783.50', size: '24,306', total: '69,131' },
-      { price: '37,782.00', size: '9,061', total: '78,192' },
-      { price: '37,779.50', size: '7,735', total: '85,927' },
-      { price: '37,779.00', size: '55,000', total: '140,927' },
-      { price: '37,776.50', size: '500', total: '141,427' },
-      { price: '37,773.50', size: '20,000', total: '161,427' },
-      { price: '37,773.00', size: '20,021', total: '181,448' },
-      { price: '37,771.50', size: '4,265', total: '185,713' },
-      { price: '37,770.00', size: '180,000', total: '365,713' },
-      { price: '37,766.50', size: '121,903', total: '487,616' },
-      { price: '37,766.00', size: '14,315', total: '501,931' },
-      { price: '37,761.00', size: '20,150', total: '522,081' },
-      { price: '37,760.50', size: '39,157', total: '561,238' },
-      { price: '37,753.50', size: '2,973', total: '564,211' },
-      { price: '37,749.50', size: '100', total: '564,311' },
-      { price: '37,747.50', size: '20,000', total: '584,311' },
-      { price: '37,747.00', size: '399,999', total: '984,310' },
-      { price: '37,746.50', size: '20,000', total: '1,004,310' },
-      { price: '37,746.00', size: '57,014', total: '1,061,324' },
-      { price: '37,745.00', size: '2,900', total: '1,064,224' },
-      { price: '37,743.50', size: '199', total: '1,064,423' },
-      { price: '37,742.50', size: '51,474', total: '1,115,897' },
+      {
+        price: '37,788.00',
+        size: '4,400',
+        total: '4,400',
+      },
+      {
+        price: '37,785.00',
+        size: '30,425',
+        total: '34,825',
+      },
+      {
+        price: '37,784.00',
+        size: '10,000',
+        total: '44,825',
+      },
+      {
+        price: '37,783.50',
+        size: '24,306',
+        total: '69,131',
+      },
+      {
+        price: '37,782.00',
+        size: '9,061',
+        total: '78,192',
+      },
+      {
+        price: '37,779.50',
+        size: '7,735',
+        total: '85,927',
+      },
+      {
+        price: '37,779.00',
+        size: '55,000',
+        total: '140,927',
+      },
+      {
+        price: '37,776.50',
+        size: '500',
+        total: '141,427',
+      },
+      {
+        price: '37,773.50',
+        size: '20,000',
+        total: '161,427',
+      },
+      {
+        price: '37,773.00',
+        size: '20,021',
+        total: '181,448',
+      },
+      {
+        price: '37,771.50',
+        size: '4,265',
+        total: '185,713',
+      },
+      {
+        price: '37,770.00',
+        size: '180,000',
+        total: '365,713',
+      },
+      {
+        price: '37,766.50',
+        size: '121,903',
+        total: '487,616',
+      },
+      {
+        price: '37,766.00',
+        size: '14,315',
+        total: '501,931',
+      },
+      {
+        price: '37,761.00',
+        size: '20,150',
+        total: '522,081',
+      },
+      {
+        price: '37,760.50',
+        size: '39,157',
+        total: '561,238',
+      },
+      {
+        price: '37,753.50',
+        size: '2,973',
+        total: '564,211',
+      },
+      {
+        price: '37,749.50',
+        size: '100',
+        total: '564,311',
+      },
+      {
+        price: '37,747.50',
+        size: '20,000',
+        total: '584,311',
+      },
+      {
+        price: '37,747.00',
+        size: '399,999',
+        total: '984,310',
+      },
+      {
+        price: '37,746.50',
+        size: '20,000',
+        total: '1,004,310',
+      },
+      {
+        price: '37,746.00',
+        size: '57,014',
+        total: '1,061,324',
+      },
+      {
+        price: '37,745.00',
+        size: '2,900',
+        total: '1,064,224',
+      },
+      {
+        price: '37,743.50',
+        size: '199',
+        total: '1,064,423',
+      },
+      {
+        price: '37,742.50',
+        size: '51,474',
+        total: '1,115,897',
+      },
     ],
     asks: [
-      { price: '37,807.50', size: '10,000', total: '10,000' },
-      { price: '37,808.00', size: '7,520', total: '17,520' },
-      { price: '37,816.50', size: '4,309', total: '21,829' },
-      { price: '37,817.50', size: '500', total: '22,329' },
-      { price: '37,818.50', size: '20,000', total: '42,329' },
-      { price: '37,819.50', size: '11,595', total: '53,924' },
-      { price: '37,820.00', size: '133,722', total: '187,646' },
-      { price: '37,821.00', size: '17,354', total: '205,000' },
-      { price: '37,825.00', size: '2,892', total: '207,892' },
-      { price: '37,825.50', size: '49,962', total: '257,854' },
-      { price: '37,826.00', size: '40,059', total: '297,913' },
-      { price: '37,826.50', size: '61,045', total: '358,958' },
-      { price: '37,830.50', size: '4,400', total: '363,358' },
-      { price: '37,833.00', size: '30,000', total: '393,358' },
-      { price: '37,839.00', size: '2,852', total: '396,210' },
-      { price: '37,840.00', size: '20,000', total: '416,210' },
-      { price: '37,840.50', size: '128,784', total: '544,994' },
-      { price: '37,843.00', size: '27,811', total: '572,805' },
-      { price: '37,844.00', size: '100,010', total: '672,815' },
-      { price: '37,847.00', size: '2,955', total: '675,770' },
-      { price: '37,852.00', size: '20,000', total: '695,770' },
-      { price: '37,852.50', size: '399,999', total: '1,095,769' },
-      { price: '37,853.50', size: '41,765', total: '1,137,534' },
-      { price: '37,854.00', size: '100', total: '1,137,634' },
-      { price: '37,854.50', size: '50,000', total: '1,187,634' },
+      {
+        price: '37,807.50',
+        size: '10,000',
+        total: '10,000',
+      },
+      {
+        price: '37,808.00',
+        size: '7,520',
+        total: '17,520',
+      },
+      {
+        price: '37,816.50',
+        size: '4,309',
+        total: '21,829',
+      },
+      {
+        price: '37,817.50',
+        size: '500',
+        total: '22,329',
+      },
+      {
+        price: '37,818.50',
+        size: '20,000',
+        total: '42,329',
+      },
+      {
+        price: '37,819.50',
+        size: '11,595',
+        total: '53,924',
+      },
+      {
+        price: '37,820.00',
+        size: '133,722',
+        total: '187,646',
+      },
+      {
+        price: '37,821.00',
+        size: '17,354',
+        total: '205,000',
+      },
+      {
+        price: '37,825.00',
+        size: '2,892',
+        total: '207,892',
+      },
+      {
+        price: '37,825.50',
+        size: '49,962',
+        total: '257,854',
+      },
+      {
+        price: '37,826.00',
+        size: '40,059',
+        total: '297,913',
+      },
+      {
+        price: '37,826.50',
+        size: '61,045',
+        total: '358,958',
+      },
+      {
+        price: '37,830.50',
+        size: '4,400',
+        total: '363,358',
+      },
+      {
+        price: '37,833.00',
+        size: '30,000',
+        total: '393,358',
+      },
+      {
+        price: '37,839.00',
+        size: '2,852',
+        total: '396,210',
+      },
+      {
+        price: '37,840.00',
+        size: '20,000',
+        total: '416,210',
+      },
+      {
+        price: '37,840.50',
+        size: '128,784',
+        total: '544,994',
+      },
+      {
+        price: '37,843.00',
+        size: '27,811',
+        total: '572,805',
+      },
+      {
+        price: '37,844.00',
+        size: '100,010',
+        total: '672,815',
+      },
+      {
+        price: '37,847.00',
+        size: '2,955',
+        total: '675,770',
+      },
+      {
+        price: '37,852.00',
+        size: '20,000',
+        total: '695,770',
+      },
+      {
+        price: '37,852.50',
+        size: '399,999',
+        total: '1,095,769',
+      },
+      {
+        price: '37,853.50',
+        size: '41,765',
+        total: '1,137,534',
+      },
+      {
+        price: '37,854.00',
+        size: '100',
+        total: '1,137,634',
+      },
+      {
+        price: '37,854.50',
+        size: '50,000',
+        total: '1,187,634',
+      },
     ],
     spread: 'Spread: 19.5 (0.05%)',
+    productId: 'PI_XBTUSD',
   };
 
   it('should format the list properly', () => {
-    expect(getList(initialData, data)).toEqual(expectedResult);
+    expect(getUpdatedList(initialData, data)).toEqual(expectedResult);
   });
 });

@@ -4,12 +4,12 @@ import { getUniqueList } from './getUniqueList';
 import { numberFormat } from './numberFormat';
 import { FeedsResponse, WebsocketResponse } from 'src/api';
 
-const getList = (
-  initialData: WebsocketResponse,
+const getUpdatedList = (
+  snapshotData: WebsocketResponse,
   data: WebsocketResponse,
 ): FeedsResponse => {
-  const bids = getUniqueList(initialData?.bids, data?.bids);
-  const asks = getUniqueList(initialData?.asks, data?.asks);
+  const bids = getUniqueList(snapshotData?.bids, data?.bids);
+  const asks = getUniqueList(snapshotData?.asks, data?.asks);
 
   const asksLowest = asks[0][0];
   const bidsHighest = bids[0][0];
@@ -17,10 +17,11 @@ const getList = (
   const spreadPercent = calculatePercent(asksLowest, bidsHighest);
 
   return {
+    productId: data?.product_id,
     bids: formattedResponse(bids),
     asks: formattedResponse(asks),
     spread: `Spread: ${spread} (${spreadPercent}%)`,
   };
 };
 
-export { getList };
+export { getUpdatedList };

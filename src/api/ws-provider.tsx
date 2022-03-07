@@ -11,12 +11,12 @@ import React, {
 } from 'react';
 import { Alert } from 'react-native';
 import {
-  BITCOIN_API_MESSAGE,
+  BITCOIN_API,
   INITIAL_FEED_KEY,
   THROTTLE_DELAY,
   WEBSOCKET_URL,
 } from 'src/constants';
-import { getList } from 'src/utils';
+import { getUpdatedList } from 'src/utils';
 
 type WSProviderType = {
   data: FeedsResponse;
@@ -33,56 +33,81 @@ const useWS = () => useContext(WSContext);
 const getSocket = (url: string) => new WebSocket(url);
 
 const WSProvider = ({ children }: { children: ReactNode }) => {
+  const connection = useRef<WebSocket | null>();
+  const snapshotData = useRef<WebsocketResponse>({});
   const [data, setData] = useState<FeedsResponse>({});
-  const connection = useRef<WebSocket>(getSocket(WEBSOCKET_URL));
-  const initialDataFeed = useRef<WebsocketResponse>({});
 
   const stopConnection = useCallback(() => {
     connection.current?.close();
   }, []);
 
   const updateData = useCallback(() => {
+    if (!connection.current) {
+      return;
+    }
+
     connection.current.onmessage = throttle(response => {
+      if (isEmpty(snapshotData.current)) {
+        return;
+      }
       const data: WebsocketMessage = JSON.parse(response?.data);
-      const hasInfo = !isEmpty(initialDataFeed.current);
-      hasInfo && setData(getList(initialDataFeed.current, data));
+      setData(getUpdatedList(snapshotData.current, data));
     }, THROTTLE_DELAY);
   }, []);
 
-  const requestData = useCallback(
-    () =>
-      (connection.current.onmessage = response => {
-        const data: WebsocketMessage = JSON.parse(response?.data);
-        if (data?.feed === INITIAL_FEED_KEY) {
-          initialDataFeed.current = data;
-          setData(getList(initialDataFeed.current, data));
-          updateData();
-        }
-      }),
-    [updateData],
-  );
+  const addListener = useCallback(() => {
+    if (!connection?.current) {
+      stopConnection();
+      return;
+    }
+
+    connection.current.onmessage = response => {
+      const data: WebsocketMessage = JSON.parse(response?.data);
+      if (data?.feed === INITIAL_FEED_KEY && isEmpty(snapshotData.current)) {
+        snapshotData.current = data;
+        setData(getUpdatedList(snapshotData.current, data));
+        updateData();
+      }
+    };
+  }, [stopConnection, updateData]);
+
+  const showErrorMessage = useCallback(() => {
+    Alert.alert('Error', 'An error has ocurred!');
+  }, []);
+
+  const handleErrorConnection = useCallback(() => {
+    if (!connection?.current) {
+      return;
+    }
+
+    connection.current.onerror = () => {
+      showErrorMessage();
+    };
+  }, [showErrorMessage]);
 
   const startConnection = useCallback(
-    (message: WebsocketMessage = BITCOIN_API_MESSAGE) => {
+    (message: WebsocketMessage = BITCOIN_API) => {
       connection.current = getSocket(WEBSOCKET_URL);
       const socket = connection.current;
-      socket.onopen = async () => {
+      socket.onopen = () => {
         socket?.send(JSON.stringify(message));
         try {
-          requestData();
+          addListener();
+          handleErrorConnection();
         } catch {
           Alert.alert('Error', 'An error has ocurred!');
         }
       };
     },
-    [requestData],
+    [addListener, handleErrorConnection],
   );
 
   const toggleFeed = useCallback(
     ({ message }: { message: WebsocketMessage }) => {
       stopConnection();
+      connection.current = null;
+      snapshotData.current = {};
       setData({});
-      initialDataFeed.current = {};
       startConnection(message);
     },
     [stopConnection, startConnection],

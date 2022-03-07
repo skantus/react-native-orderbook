@@ -12,6 +12,7 @@ const styles = (theme: Theme) =>
       color: theme.$ternary,
       fontSize: 15,
       fontWeight: '700',
+      paddingHorizontal: 40,
       paddingVertical: 5,
       textAlign: 'center',
     },
