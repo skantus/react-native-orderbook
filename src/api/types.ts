@@ -20,6 +20,7 @@ export type FeedType = {
   price: string;
   size: string;
   total: string;
+  percent: string;
 };
 
 export type FeedsResponse = {

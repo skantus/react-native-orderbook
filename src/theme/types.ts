@@ -4,7 +4,9 @@ export type Theme = {
   $gray: string;
   $base: string;
   $primary: string;
+  $primaryLight: string;
   $secondary: string;
+  $secondaryLight: string;
   $ternary: string;
   $brand: string;
 };

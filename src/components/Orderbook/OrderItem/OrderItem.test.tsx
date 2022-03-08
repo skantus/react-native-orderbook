@@ -8,7 +8,7 @@ describe('OrderItem', () => {
     const { queryByTestId } = render(
       <OrderItem
         index={0}
-        item={{ price: '0', size: '0', total: '0' }}
+        item={{ price: '0', size: '0', total: '0', percent: '0%' }}
         type={OrderType.Ask}
       />,
     );

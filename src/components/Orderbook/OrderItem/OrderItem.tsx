@@ -15,13 +15,18 @@ const OrderItem = ({ item, index, type }: Props): ReactElement => {
   const { theme } = useTheme();
   const style = styles(theme);
   const textStyle = type === OrderType.Ask ? style.askText : style.bidText;
+  const barChartStyle =
+    type === OrderType.Ask ? style.asksBarChart : style.bidsBarChart;
 
   return (
-    <View key={index} style={style.content} testID="orderItem">
-      <Text style={textStyle}>{item?.price}</Text>
-      <Text style={style.text}>{item?.size}</Text>
-      <Text style={style.text}>{item?.total}</Text>
-    </View>
+    <>
+      <View style={[barChartStyle, { width: item?.percent }]} />
+      <View key={index} style={style.content} testID="orderItem">
+        <Text style={textStyle}>{item?.price}</Text>
+        <Text style={style.text}>{item?.size}</Text>
+        <Text style={style.text}>{item?.total}</Text>
+      </View>
+    </>
   );
 };
 

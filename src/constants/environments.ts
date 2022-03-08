@@ -22,4 +22,4 @@ export const ETHERIUM_API: WebsocketMessage = {
   product_ids: [ETHERIUM_ID],
 };
 
-export const THROTTLE_DELAY = 400;
+export const THROTTLE_DELAY = 800;

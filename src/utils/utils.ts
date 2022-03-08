@@ -18,9 +18,9 @@ const getUpdatedList = (
 
   return {
     productId: data?.product_id,
-    bids: formattedResponse(bids),
-    asks: formattedResponse(asks),
     spread: `Spread: ${spread} (${spreadPercent}%)`,
+    bids: formattedResponse(bids, bidsHighest),
+    asks: formattedResponse(asks, asksLowest),
   };
 };
 

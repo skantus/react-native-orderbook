@@ -1,70 +1,35 @@
 import { formattedResponse } from './formattedResponse';
-import { OrderType } from 'src/api';
+import { FeedType, OrderType } from 'src/api';
 
 describe('formattedResponse', () => {
   const list: OrderType[] = [
     [37737, 4400],
     [37736, 1204],
     [37735.5, 10000],
-    [37735, 12665],
-    [37729.5, 29926],
-    [37729, 110454],
-    [37727, 10],
-    [37726, 20000],
-    [37725.5, 20000],
-    [37722.5, 7614],
-    [37721.5, 4331],
-    [37721, 55000],
-    [37718, 4250],
-    [37712, 2277],
-    [37711.5, 20000],
-    [37711, 19998],
-    [37695.5, 2939],
-    [37692.5, 3459],
-    [37692, 40000],
-    [37691.5, 23110],
-    [37688, 399999],
-    [37687.5, 58727],
-    [37686, 143124],
-    [37685.5, 14315],
-    [37683.5, 2643],
-    [37683.5, 0],
-    [37683.5, 0],
-    [37683.5, 0],
-    [37683.5, 0],
-    [37683.5, 0],
-    [37683.5, 0],
   ];
 
-  const expectedResult = [
-    { price: '37,737.00', size: '4,400', total: '4,400' },
-    { price: '37,736.00', size: '1,204', total: '5,604' },
-    { price: '37,735.50', size: '10,000', total: '15,604' },
-    { price: '37,735.00', size: '12,665', total: '28,269' },
-    { price: '37,729.50', size: '29,926', total: '58,195' },
-    { price: '37,729.00', size: '110,454', total: '168,649' },
-    { price: '37,727.00', size: '10', total: '168,659' },
-    { price: '37,726.00', size: '20,000', total: '188,659' },
-    { price: '37,725.50', size: '20,000', total: '208,659' },
-    { price: '37,722.50', size: '7,614', total: '216,273' },
-    { price: '37,721.50', size: '4,331', total: '220,604' },
-    { price: '37,721.00', size: '55,000', total: '275,604' },
-    { price: '37,718.00', size: '4,250', total: '279,854' },
-    { price: '37,712.00', size: '2,277', total: '282,131' },
-    { price: '37,711.50', size: '20,000', total: '302,131' },
-    { price: '37,711.00', size: '19,998', total: '322,129' },
-    { price: '37,695.50', size: '2,939', total: '325,068' },
-    { price: '37,692.50', size: '3,459', total: '328,527' },
-    { price: '37,692.00', size: '40,000', total: '368,527' },
-    { price: '37,691.50', size: '23,110', total: '391,637' },
-    { price: '37,688.00', size: '399,999', total: '791,636' },
-    { price: '37,687.50', size: '58,727', total: '850,363' },
-    { price: '37,686.00', size: '143,124', total: '993,487' },
-    { price: '37,685.50', size: '14,315', total: '1,007,802' },
-    { price: '37,683.50', size: '2,643', total: '1,010,445' },
+  const expectedResult: FeedType[] = [
+    {
+      price: '37,737.00',
+      size: '4,400',
+      total: '4,400',
+      percent: '18%',
+    },
+    {
+      price: '37,736.00',
+      size: '1,204',
+      total: '5,604',
+      percent: '5%',
+    },
+    {
+      price: '37,735.50',
+      size: '10,000',
+      total: '15,604',
+      percent: '40%',
+    },
   ];
 
   it('should format the list properly', () => {
-    expect(formattedResponse(list)).toEqual(expectedResult);
+    expect(formattedResponse(list, 25000)).toEqual(expectedResult);
   });
 });

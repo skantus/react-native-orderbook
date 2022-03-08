@@ -7,23 +7,38 @@ const defaultText: { [key: string]: string | number } = {
   textAlign: 'right',
 };
 
+const defaultBarChart: { [key: string]: string | number } = {
+  flex: 1,
+  height: 27,
+  position: 'absolute',
+  opacity: 0.5,
+};
+
 const styles = (theme: Theme) =>
   StyleSheet.create({
     askText: {
       color: theme.$secondary,
       ...defaultText,
     },
+    asksBarChart: {
+      backgroundColor: theme.$secondaryLight,
+      ...defaultBarChart,
+    },
     bidText: {
       color: theme.$primary,
       ...defaultText,
     },
+    bidsBarChart: {
+      backgroundColor: theme.$primaryLight,
+      ...defaultBarChart,
+    },
     content: {
+      alignItems: 'center',
       flex: 1,
       flexDirection: 'row',
-      height: 20,
       justifyContent: 'space-between',
-      marginTop: 10,
       paddingRight: 24,
+      paddingVertical: 5,
     },
     text: {
       color: theme.$gray,

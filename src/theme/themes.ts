@@ -5,8 +5,10 @@ const dark: Theme = {
   $text: 'white',
   $gray: '#b5b8be',
   $base: '#1e2735',
-  $primary: 'green',
-  $secondary: 'red',
+  $primary: '#33dbb7',
+  $primaryLight: '#21877e',
+  $secondary: '#f44336',
+  $secondaryLight: '#a0606a',
   $ternary: '#454d59',
   $brand: '#574dda',
 };
@@ -17,7 +19,9 @@ const light: Theme = {
   $gray: 'gray',
   $base: 'gray',
   $primary: 'green',
+  $primaryLight: 'lima',
   $secondary: 'red',
+  $secondaryLight: '#45212d',
   $ternary: 'dimgrey',
   $brand: 'gray',
 };
