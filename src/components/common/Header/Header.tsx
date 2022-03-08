@@ -15,7 +15,7 @@ const Header = ({ title }: Props): ReactElement => {
     <View style={style.container} testID="header">
       <Text style={style.title}>{title}</Text>
       <TouchableOpacity onPress={toggleTheme}>
-        <Text style={style.text}>{isDark ? 'dark' : 'light'}</Text>
+        <Text style={style.text}>{isDark ? 'light' : 'dark'}</Text>
       </TouchableOpacity>
     </View>
   );
