@@ -2,17 +2,17 @@
 
 ### Feature Set
 
-- ✅  Totals are correctly calculated.
-- ✅  Spread is correctly calculated.
-- ✅  Sorting of the orderbook is correct.
-- ⚠️  Depth graph is correctly displayed and the performance of its rendering is considered. **(TODO)**
+- ✅  Totals correctly calculated.
+- ✅  Spread correctly calculated.
+- ✅  Sorting of the orderbook.
+- ⚠️  Depth graph **(TODO)**
 - ✅  Zero size levels are correctly removed from the orderbook.
 - ✅  Switching between contracts works as expected.
 
 ### Design
 
-- ✅  Design mirrors the mockups provided.
-- ✅  Responsive orderbook orientation
+- ✅  Design mirrors.
+- ✅  Responsive orderbook orientation.
 - ✅  Rerender requests are throttled.
 - ✅  Rerender throttling time is variable based on device performance.
 
