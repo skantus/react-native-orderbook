@@ -23,15 +23,10 @@ const Orderbook = () => {
   const [currentFeed, setCurrentFeed] = useState<string>(BITCOIN_ID);
   const { data, toggleFeed } = useWS();
 
-  const renderHeader = useCallback(
-    () => <Text style={style.spreadText}>{data?.spread}</Text>,
-    [style.spreadText, data?.spread],
-  );
-
   const onToggleFeed = useCallback(() => {
-    const defaultSelected = currentFeed === BITCOIN_ID;
-    const message = defaultSelected ? ETHERIUM_API : BITCOIN_API;
-    setCurrentFeed(defaultSelected ? ETHERIUM_ID : BITCOIN_ID);
+    const selected = currentFeed === BITCOIN_ID;
+    const message = selected ? ETHERIUM_API : BITCOIN_API;
+    setCurrentFeed(selected ? ETHERIUM_ID : BITCOIN_ID);
     toggleFeed({ message });
   }, [currentFeed, toggleFeed]);
 
@@ -44,7 +39,7 @@ const Orderbook = () => {
         type={OrderType.Ask}
       />
       <OrderList
-        header={renderHeader()}
+        header={<Text style={style.spreadText}>{data?.spread}</Text>}
         list={data?.bids}
         type={OrderType.Bid}
       />

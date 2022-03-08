@@ -6,6 +6,8 @@
 
 ## How to run
 
+Run on iOS:
+
 - `yarn`
 - `cd ios && pod install` (if you’re using Xcode with Rosseta) - or - `sudo arch -x86_64 gem install ffi` 
 - `yarn start`

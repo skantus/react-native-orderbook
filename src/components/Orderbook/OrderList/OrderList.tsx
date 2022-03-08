@@ -32,6 +32,7 @@ const OrderList = ({ type, header, list }: Props): ReactElement => {
         keyExtractor={keyExtractor}
         persistentScrollbar={true}
         renderItem={renderItem}
+        scrollEnabled={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         style={styles.container}
