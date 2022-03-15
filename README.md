@@ -5,7 +5,7 @@
 - ✅  Totals correctly calculated.
 - ✅  Spread correctly calculated.
 - ✅  Sorting of the orderbook.
-- ✅ Depth graph **(TODO)**
+- ✅ Depth graph
 - ✅  Zero size levels are correctly removed from the orderbook.
 - ✅  Switching between contracts works as expected.
 
