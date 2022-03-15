@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 import { FeedType } from 'src/api';
 import { OrderType } from 'src/components/types';
 import { useTheme } from 'src/theme';
+import { numberFormat } from 'src/utils/numberFormat';
 
 type Props = {
   item: FeedType;
@@ -22,9 +23,9 @@ const OrderItem = ({ item, index, type }: Props): ReactElement => {
     <>
       <View style={[barChartStyle, { width: item?.percent }]} />
       <View key={index} style={style.content} testID="orderItem">
-        <Text style={textStyle}>{item?.price}</Text>
-        <Text style={style.text}>{item?.size}</Text>
-        <Text style={style.text}>{item?.total}</Text>
+        <Text style={textStyle}>{numberFormat(2).format(item?.price)}</Text>
+        <Text style={style.text}>{numberFormat().format(item?.size)}</Text>
+        <Text style={style.text}>{numberFormat().format(item?.total)}</Text>
       </View>
     </>
   );

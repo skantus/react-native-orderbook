@@ -35,7 +35,7 @@ const getSocket = (url: string) => new WebSocket(url);
 const WSProvider = ({ children }: { children: ReactNode }) => {
   const connection = useRef<WebSocket | null>();
   const snapshotData = useRef<WebsocketResponse>({});
-  const [data, setData] = useState<FeedsResponse>({});
+  const [orders, setOrders] = useState<FeedsResponse>({});
 
   const stopConnection = useCallback(() => {
     connection.current?.close();
@@ -46,12 +46,18 @@ const WSProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
+    let previousList: FeedsResponse;
     connection.current.onmessage = throttle(response => {
       if (isEmpty(snapshotData.current)) {
         return;
       }
       const data: WebsocketMessage = JSON.parse(response?.data);
-      setData(getUpdatedList(snapshotData.current, data));
+      previousList = getUpdatedList({
+        snapshotData: snapshotData.current,
+        data,
+        previousList,
+      });
+      setOrders(previousList);
     }, THROTTLE_DELAY);
   }, []);
 
@@ -65,7 +71,12 @@ const WSProvider = ({ children }: { children: ReactNode }) => {
       const data: WebsocketMessage = JSON.parse(response?.data);
       if (data?.feed === INITIAL_FEED_KEY && isEmpty(snapshotData.current)) {
         snapshotData.current = data;
-        setData(getUpdatedList(snapshotData.current, data));
+        setOrders(
+          getUpdatedList({
+            snapshotData: snapshotData.current,
+            data,
+          }),
+        );
         updateData();
       }
     };
@@ -95,11 +106,11 @@ const WSProvider = ({ children }: { children: ReactNode }) => {
           addListener();
           handleErrorConnection();
         } catch {
-          Alert.alert('Error', 'An error has ocurred!');
+          showErrorMessage();
         }
       };
     },
-    [addListener, handleErrorConnection],
+    [addListener, handleErrorConnection, showErrorMessage],
   );
 
   const toggleFeed = useCallback(
@@ -107,7 +118,7 @@ const WSProvider = ({ children }: { children: ReactNode }) => {
       stopConnection();
       connection.current = null;
       snapshotData.current = {};
-      setData({});
+      setOrders({});
       startConnection(message);
     },
     [stopConnection, startConnection],
@@ -121,7 +132,7 @@ const WSProvider = ({ children }: { children: ReactNode }) => {
   return (
     <WSContext.Provider
       value={{
-        data,
+        data: orders,
         toggleFeed,
       }}>
       {children}

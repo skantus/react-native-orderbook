@@ -11,7 +11,7 @@ describe('Header', () => {
     expect(component?.props.children).toBeTruthy();
     expect(component?.props.testID).toEqual('header');
 
-    const button = getByText('dark');
-    expect(button.props.children).toEqual('dark');
+    const button = getByText('light');
+    expect(button.props.children).toEqual('light');
   });
 });

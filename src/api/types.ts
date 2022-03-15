@@ -17,9 +17,9 @@ export type WebsocketResponse = {
 };
 
 export type FeedType = {
-  price: string;
-  size: string;
-  total: string;
+  price: number;
+  size: number;
+  total: number;
   percent: string;
 };
 
